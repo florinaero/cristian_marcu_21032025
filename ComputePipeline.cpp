@@ -1,9 +1,14 @@
-//
-//  ComputePipeline.cpp
-//  cristian_marcu_21032025
-//
-//  Created by cristi on 21.03.2025.
-//
+/**
+ * @file ComputePipeline.cpp
+ * @brief Implements the ComputePipeline class for handling image and compressed data processing.
+ *
+ * This file contains the implementation of the ComputePipeline class, which is responsible
+ * for loading URIs, determining file types, parsing JSON metadata, decoding images,
+ * and decompressing data if needed.
+ *
+ * @author cristi
+ * @date 21.03.2025
+ */
 
 #include "ComputePipeline.hpp"
 #include "CompressedData.hpp"
@@ -12,7 +17,11 @@
 #include <fstream>
 #include <iostream>
 
-
+/**
+ * @brief Constructs a ComputePipeline object.
+ *
+ * Initializes the supported URI types and file extensions for images and compressed files.
+ */
 ComputePipeline::ComputePipeline()
 : file_type_(FileType::Invalid) {
     uri_types_str_ = {"file://", "http://", "https://", "bundle://"};
@@ -20,6 +29,14 @@ ComputePipeline::ComputePipeline()
     compress_extensions_ = {".zip", ".rar", ".gz"};
 }
 
+/**
+ * @brief Loads and validates a given URI.
+ *
+ * Determines the type of file from the URI and updates the internal state accordingly.
+ *
+ * @param[in] uri The URI to load.
+ * @return true if the URI is valid and the file type is determined, false otherwise.
+ */
 bool ComputePipeline::LoadUri(std::string_view uri) {
     bool valid = false;
     
@@ -63,7 +80,13 @@ bool ComputePipeline::LoadUri(std::string_view uri) {
     return false;
 }
 
-
+/**
+ * @brief Parses a JSON file and extracts relevant metadata.
+ *
+ * Reads a JSON file from the stored URI and extracts metadata such as file size, type, and path.
+ *
+ * @return An optional JSONData object containing extracted data, or std::nullopt if parsing fails.
+ */
 std::optional<JSONData> ComputePipeline::ParseJSON() {
     std::ifstream file(uri_);
     JSONData result;
@@ -84,7 +107,14 @@ std::optional<JSONData> ComputePipeline::ParseJSON() {
     return result;
 }
 
-
+/**
+ * @brief Decodes images from the specified path or extracted compressed data.
+ *
+ * If a data path is provided, images are loaded from that location. Otherwise, they are decoded
+ * from extracted compressed data.
+ *
+ * @param[in] data_path The directory containing image files, or an empty string to use extracted data.
+ */
 void ComputePipeline::DecodeImages(const std::string& data_path) {
     // Images have been uncompressed and are stored in a vector
     
@@ -113,6 +143,12 @@ void ComputePipeline::DecodeImages(const std::string& data_path) {
     }
 }
 
+/**
+ * @brief Decompresses data from the given path.
+ *
+ * @param[in] data_path The path to the compressed data.
+ * @return true if decompression was successful, false otherwise.
+ */
 bool ComputePipeline::DecompressData(const std::string& data_path) {
     
     if (!data_path.empty()) {
@@ -127,7 +163,13 @@ bool ComputePipeline::DecompressData(const std::string& data_path) {
     return true;
 }
 
-
+/**
+ * @brief Executes the pipeline for processing JSON, compressed, or image files.
+ *
+ * Depending on the file type, this function parses JSON, decompresses data, and decodes images.
+ *
+ * @return true if the pipeline execution is successful, false otherwise.
+ */
 bool ComputePipeline::ExecutePipeline() {
     JSONData json_obj;
     

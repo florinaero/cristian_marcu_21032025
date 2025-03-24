@@ -1,9 +1,12 @@
-//
-//  Image.hpp
-//  cristian_marcu_21032025
-//
-//  Created by cristi on 21.03.2025.
-//
+/**
+ * @file Image.hpp
+ * @brief Declares the Image class for representing an image object.
+ *
+ * This file defines the `Image` class, which holds the image data for a single image object.
+ *
+ * @author cristi
+ * @date 21.03.2025
+ */
 
 #ifndef Image_hpp
 #define Image_hpp

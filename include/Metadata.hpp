@@ -1,9 +1,13 @@
-//
-//  Metadata.hpp
-//  cristian_marcu_21032025
-//
-//  Created by cristi on 21.03.2025.
-//
+/**
+ * @file Metadata.hpp
+ * @brief Declares the Metadata struct for storing metadata information.
+ *
+ * This file defines the `Metadata` struct, which holds basic metadata information
+ * about a file or image, including its size, status flags, and type.
+ *
+ * @author cristi
+ * @date 21.03.2025
+ */
 
 #ifndef Metadata_h
 #define Metadata_h

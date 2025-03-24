@@ -1,9 +1,14 @@
-//
-//  ComputePipeline.hpp
-//  cristian_marcu_21032025
-//
-//  Created by cristi on 21.03.2025.
-//
+/**
+ * @file ComputePipeline.hpp
+ * @brief Declares the ComputePipeline class for processing different file types.
+ *
+ * This file defines the ComputePipeline class, which determines file types
+ * and processes them accordingly, including JSON parsing, data decompression,
+ * and image decoding.
+ *
+ * @author cristi
+ * @date 21.03.2025
+ */
 
 #ifndef ComputePipeline_hpp
 #define ComputePipeline_hpp
